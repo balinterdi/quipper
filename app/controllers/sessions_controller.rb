@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   def create
-    update_user
+    user = update_user
+    session[:current_user_id] = user.id
     redirect_to root_path
   end
 
@@ -11,6 +12,7 @@ private
       user = User.new
     end
     user.update_attributes(user_attributes)
+    user
   end
 
   def user_attributes

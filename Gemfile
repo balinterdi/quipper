@@ -8,6 +8,7 @@ gem 'rails', '~> 4.0.0'
 gem 'sqlite3'
 gem 'pg'
 gem 'omniauth-twitter'
+gem 'twitter'
 
 group :development do
   gem 'debugger'
