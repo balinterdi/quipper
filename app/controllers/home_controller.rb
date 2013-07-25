@@ -1,10 +1,12 @@
 class HomeController < ApplicationController
   def index
-    @user_feed = Twitter.user_timeline(current_user.nickname)
+    if oauth_token
+      @user_feed = home_timeline
+    end
   end
 
 private
-  def user_feed
-    Twitter.user_timeline(current_user.nickname)
+  def home_timeline
+    twitter_client.home_timeline
   end
 end

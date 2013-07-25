@@ -2,10 +2,12 @@ class SessionsController < ApplicationController
   def create
     user = update_user
     session[:current_user_id] = user.id
+
     redirect_to root_path
   end
 
 private
+
   def update_user
     user = User.first(conditions: { nickname: auth_hash.info.nickname })
     unless user

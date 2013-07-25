@@ -1,8 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user
+  helper_method :current_user, :oauth_token
 
 private
+  def twitter_client
+    Twitter::Client.new(
+      oauth_token: current_user.oauth_token,
+      oauth_token_secret: current_user.oauth_token_secret
+    )
+  end
+
   def current_user
     if session[:current_user_id]
       User.find(session[:current_user_id])
@@ -13,7 +20,4 @@ private
     current_user.try(:oauth_token)
   end
 
-  def oauth_token_secret
-    current_user.try(:oauth_token_secret)
-  end
 end
