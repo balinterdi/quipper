@@ -2,7 +2,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user, :oauth_token
 
+  before_filter :authenticate_with_twitter
+
 private
+
+  def authenticate_with_twitter
+    unless oauth_token
+      redirect_to root_path
+    end
+  end
+
   def twitter_client
     Twitter::Client.new(
       oauth_token: current_user.oauth_token,
