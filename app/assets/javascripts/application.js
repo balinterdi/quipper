@@ -14,3 +14,5 @@
 //= require_tree .
 //= require_self
 window.App = Ember.Application.create();
+
+$(document).foundation();
