@@ -1,10 +1,13 @@
 class SessionsController < ApplicationController
   skip_before_filter :authenticate_with_twitter
 
+  def new
+  end
+
   def create
     user = update_user
     session[:current_user_id] = user.id
-    redirect_to timeline_path(id: user.nickname, format: :json)
+    redirect_to root_path
   end
 
 private

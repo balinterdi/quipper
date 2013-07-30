@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+  #TODO: For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :current_user, :oauth_token
 
@@ -10,7 +10,7 @@ private
 
   def authenticate_with_twitter
     unless oauth_token
-      redirect_to root_path
+      redirect_to new_session_path
     end
   end
 
