@@ -1,3 +1,11 @@
 <script type="text/x-handlebars">
-  Hello from ember.js!
+  {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="index">
+  <ul>
+    {{#each controller}}
+      <li>{{text}}</li>
+    {{/each}}
+  </ul>
 </script>
