@@ -6,3 +6,9 @@ App.IndexRoute = Ember.Route.extend({
   }
 });
 
+App.TweetController = Ember.ObjectController.extend({
+  biggerImageUrl: function() {
+    return this.get('user.profile_image_url').replace('normal.', 'bigger.');
+  }.property('user.profile_image_url')
+});
+

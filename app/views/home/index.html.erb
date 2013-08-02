@@ -26,19 +26,19 @@
 <script type="text/x-handlebars" data-template-name="index">
   <div class="row">
     <div class="small-12 medium-8 large-8 columns medium-push-4 large-push-4">
-      {{#each controller}}
-      <div class="row">
-        <div class="small-3 large-2 columns ">
-          <img {{bindAttr src="user.profile_image_url"}} />
+      {{#each controller itemController="tweet"}}
+        <div class="row">
+          <div class="small-3 large-2 columns ">
+            <img {{bindAttr src="biggerImageUrl"}} />
+          </div>
+          <div class="small-9 large-10 columns">
+            <p>
+              <strong>{{user.screen_name}}</strong>
+              {{text}}
+            </p>
+          </div>
         </div>
-        <div class="small-9 large-10 columns">
-          <p>
-            <strong>{{user.screen_name}}</strong>
-            {{text}}
-          </p>
-        </div>
-      </div>
-      <hr />
+        <hr />
       {{/each}}
     </div>
 
