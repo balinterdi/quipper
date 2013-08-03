@@ -12,3 +12,8 @@ App.TweetController = Ember.ObjectController.extend({
   }.property('user.profile_image_url')
 });
 
+Ember.Handlebars.helper('html', function(text, options) {
+  return new Handlebars.SafeString(text.replace(/\n/g, '<br />'));
+});
+
+
