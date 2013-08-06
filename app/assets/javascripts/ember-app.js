@@ -1,6 +1,12 @@
 window.App = Ember.Application.create();
 
-App.IndexRoute = Ember.Route.extend({
+App.Router.map(function() {
+  this.resource('user', function() {
+    this.route('home');
+  });
+});
+
+App.UserHomeRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('/timelines/home.json');
   }
