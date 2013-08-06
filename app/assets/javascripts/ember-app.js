@@ -6,6 +6,12 @@ App.Router.map(function() {
   });
 });
 
+App.UserRoute = Ember.Route.extend({
+  model: function() {
+    return Ember.$.getJSON('/user.json');
+  }
+});
+
 App.UserHomeRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('/timelines/home.json');
