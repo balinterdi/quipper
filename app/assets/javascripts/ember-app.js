@@ -6,6 +6,12 @@ App.Router.map(function() {
   });
 });
 
+App.IndexRoute = Ember.Route.extend({
+  redirect: function() {
+    this.transitionTo('user.home');
+  }
+});
+
 App.UserRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('/user.json');
@@ -31,7 +37,7 @@ Ember.Handlebars.helper('html', function(tweet, options) {
     return text.slice(0, start) + '<a href="' + urlData.expanded_url + '">' + urlData.display_url + '</a>' + text.slice(end);
   }
 
-  //Essentially there is no way to extract urls from RTs from the data Twitter provides
+  // Essentially there is no way to extract urls from RTs from the data Twitter provides
   // so we might as well go simply matching urls in the text
   var text = tweet.get('text').replace(/\n/g, '<br />');
   var urlEntities = tweet.get('entities.urls');
