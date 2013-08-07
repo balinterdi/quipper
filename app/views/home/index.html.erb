@@ -36,8 +36,12 @@
 
       <div class="panel mini-profile">
         <a href="#">
-          <img {{bindAttr src=profile_image_url}} />
-          <div class="name">{{name}}</div>
+          {{#linkTo user.timeline}}
+            <img {{bindAttr src=profile_image_url}} />
+            <div class="name">
+              {{name}}
+            </div>
+          {{/linkTo}}
         </a>
         <div class="row">
           <div class="large-4">
@@ -65,6 +69,14 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="user/home">
+  {{partial "tweets"}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="user/timeline">
+  {{partial "tweets"}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="_tweets">
     <div class="small-12 medium-8 large-8 columns medium-push-4 large-push-4">
       {{#each controller itemController="tweet"}}
         <div class="row">
