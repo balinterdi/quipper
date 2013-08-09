@@ -36,7 +36,7 @@
 
       <div class="panel mini-profile">
         <a href="#">
-          {{#linkTo user.timeline}}
+          {{#linkTo user.timeline screen_name}}
             <img {{bindAttr src=profile_image_url}} />
             <div class="name">
               {{name}}
@@ -85,7 +85,9 @@
           </div>
           <div class="small-9 large-10 columns">
             <p>
-              <strong>{{user.screen_name}}</strong>
+              {{#linkTo user.timeline user.screen_name}}
+                <strong>{{user.screen_name}}</strong>
+              {{/linkTo}}
               {{html this}}
             </p>
           </div>

@@ -4,5 +4,7 @@ Quipper::Application.routes.draw do
   resources :timelines, only: :show
   resource  :user, only: :show
 
-  root :to => 'home#index'
+  get 'home' => 'home#index'
+
+  root  to:   'home#index'
 end

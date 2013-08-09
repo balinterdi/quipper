@@ -3,7 +3,7 @@ window.App = Ember.Application.create();
 App.Router.map(function() {
   this.resource('user', function() {
     this.route('home');
-    this.route('timeline');
+    this.route('timeline', { path: '/timelines/:nickname' });
   });
 });
 
@@ -21,13 +21,13 @@ App.UserRoute = Ember.Route.extend({
 
 App.UserHomeRoute = Ember.Route.extend({
   model: function() {
-    return Ember.$.getJSON('/timelines/home.json');
+    return Ember.$.getJSON('/home.json');
   }
 });
 
 App.UserTimelineRoute = Ember.Route.extend({
-  model: function() {
-    return Ember.$.getJSON('/timelines/user.json');
+  model: function(params) {
+    return Ember.$.getJSON('/timelines/' + params.nickname + '.json');
   }
 });
 
