@@ -31,4 +31,10 @@ private
     current_user.try(:oauth_token)
   end
 
+  def cache_key(*fragments)
+    common_fragments = [oauth_token, params[:controller], params[:action]]
+    logger.info "Cache key: #{fragments.concat(common_fragments)}"
+    fragments.concat(common_fragments)
+  end
+
 end

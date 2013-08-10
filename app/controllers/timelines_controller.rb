@@ -2,7 +2,11 @@ class TimelinesController < ApplicationController
   respond_to :json
 
   def show
-    respond_with user_timeline(params[:id])
+    cached_user_timeline = cache(cache_key(params[:id])) do
+      logger.info "TWITTER/USER_TIMELINE"
+      user_timeline(params[:id])
+    end
+    respond_with cached_user_timeline
   end
 
 private
