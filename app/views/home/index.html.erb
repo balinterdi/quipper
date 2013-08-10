@@ -35,13 +35,12 @@
       </div>
 
       <div class="panel mini-profile">
-        <a href="#">
-          {{#linkTo user.timeline screen_name}}
-            <img {{bindAttr src=profile_image_url}} />
-            <div class="name">
-              {{name}}
-            </div>
-          {{/linkTo}}
+        {{#view App.TimelineLinkView nameBinding=screen_name}}
+          <img {{bindAttr src=profile_image_url}} />
+          <div class="name">
+            {{name}}
+          </div>
+        {{/view}}
         </a>
         <div class="row">
           <div class="large-4">
@@ -85,9 +84,9 @@
           </div>
           <div class="small-9 large-10 columns">
             <p>
-              {{#linkTo user.timeline user.screen_name}}
+              {{#view App.TimelineLinkView nameBinding=user.screen_name}}
                 <strong>{{user.screen_name}}</strong>
-              {{/linkTo}}
+              {{/view}}
               {{html this}}
             </p>
           </div>
