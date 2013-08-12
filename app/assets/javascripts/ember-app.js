@@ -1,8 +1,33 @@
 window.App = Ember.Application.create();
 
+App.Router.map(function() {
+  this.resource('user', function() {
+    this.route('home');
+    this.route('timeline', { path: '/timelines/:nickname' });
+  });
+});
+
 App.IndexRoute = Ember.Route.extend({
+  redirect: function() {
+    this.transitionTo('user.home');
+  }
+});
+
+App.UserRoute = Ember.Route.extend({
   model: function() {
-    return Ember.$.getJSON('/timelines/home.json');
+    return Ember.$.getJSON('/user.json');
+  }
+});
+
+App.UserHomeRoute = Ember.Route.extend({
+  model: function() {
+    return Ember.$.getJSON('/home.json');
+  }
+});
+
+App.UserTimelineRoute = Ember.Route.extend({
+  model: function(params) {
+    return Ember.$.getJSON('/timelines/' + params.nickname + '.json');
   }
 });
 
@@ -19,7 +44,7 @@ Ember.Handlebars.helper('html', function(tweet, options) {
     return text.slice(0, start) + '<a href="' + urlData.expanded_url + '">' + urlData.display_url + '</a>' + text.slice(end);
   }
 
-  //Essentially there is no way to extract urls from RTs from the data Twitter provides
+  // Essentially there is no way to extract urls from RTs from the data Twitter provides
   // so we might as well go simply matching urls in the text
   var text = tweet.get('text').replace(/\n/g, '<br />');
   var urlEntities = tweet.get('entities.urls');
@@ -38,4 +63,11 @@ Ember.Handlebars.helper('html', function(tweet, options) {
   return new Handlebars.SafeString(withUrls);
 });
 
+App.TimelineLinkView = Ember.View.extend({
+  tagName: 'span',
+  layout: Ember.Handlebars.compile('<a {{bindAttr href=view.link}}>{{yield}}</a>'),
+  link: function() {
+    return "#/user/timelines/" + this.get('name');
+  }.property('user')
+});
 
